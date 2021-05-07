@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center fw-bold my-4">MBTI 말고 MVTI! 📽<br>{{ request.user }}님의 영화보는 유형은?</h1>
+  <div class="text-center">
+    <button id="classic" class="btn btn-outline-dark">Oldies but goodies! 클래식이 최고 🎹</button>
+    <button id="top100" class="btn btn-outline-dark">대중의 취향이 곧 내 취향 인기 TOP10 🏆</button>
+    <br>
+    <button id="hipster" class="btn btn-outline-dark">힙스터 기질 발동! 인기 없는 영화만 골라보기 😎</button>
+    <button id="random" class="btn btn-outline-dark">우연을 믿어요 랜덤추천 🎲</button>
+  </div>
+  <div id="card-group" class="card-group row row-cols-5 g-4">
+    
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const classicBtn = document.querySelector('#classic')
+    const top100Btn = document.querySelector('#top100')
+    const hipsterBtn = document.querySelector('#hipster')
+    const randomBtn = document.querySelector('#random')
+
+    classicBtn.addEventListener('click', function (event) {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/movies/mvti/',
+        params: {
+          answer: '1'
+        }
+      })
+      .then(function (res) {
+        const movieList = res.data.moviesList
+
+        movieList.forEach((movie) => {
+          const movieTitle = movie.title
+          const movieDate = movie.release_date
+          const voteAvg = movie.vote_average
+          const posterPath = movie.poster_path
+
+          const div1 = document.createElement('div')
+          div1.setAttribute('class', 'col')
+          const div2 = document.createElement('div')
+          div2.setAttribute('class', 'card')
+          const img = document.createElement('img')
+          img.setAttribute('src', posterPath)
+          img.setAttribute('class', 'card-img-top')
+          const div3 = document.createElement('div')
+          div3.setAttribute('class', 'card-body')
+          const cardTitle = document.createElement('h6')
+          cardTitle.setAttribute('class', 'card-title text-center fw-bold')
+          cardTitle.innerText = movieTitle
+          const cardText = document.createElement('p')
+          cardText.setAttribute('class', 'card-text text-center')
+          cardText.innerText = `평점 ⭐ ${voteAvg}`
+          
+          const parentDiv = document.querySelector('#card-group')
+          parentDiv.appendChild(div1)
+          div1.appendChild(div2)
+          div2.append(img, div3)
+          div3.append(cardTitle)
+          div3.append(cardText) 
+        })
+      })
+    }, {once: true})
+
+    top100Btn.addEventListener('click', function (event) {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/movies/mvti/',
+        params: {
+          answer: '2'
+        }
+      })
+      .then(function (res) {
+        const movieList = res.data.moviesList
+
+        movieList.forEach((movie) => {
+          const movieTitle = movie.title
+          const movieDate = movie.release_date
+          const voteAvg = movie.vote_average
+          const posterPath = movie.poster_path
+
+          const div1 = document.createElement('div')
+          div1.setAttribute('class', 'col')
+          const div2 = document.createElement('div')
+          div2.setAttribute('class', 'card')
+          const img = document.createElement('img')
+          img.setAttribute('src', posterPath)
+          img.setAttribute('class', 'card-img-top')
+          const div3 = document.createElement('div')
+          div3.setAttribute('class', 'card-body')
+          const cardTitle = document.createElement('h6')
+          cardTitle.setAttribute('class', 'card-title text-center fw-bold')
+          cardTitle.innerText = movieTitle
+          const cardText = document.createElement('p')
+          cardText.setAttribute('class', 'card-text text-center')
+          cardText.innerText = `평점 ⭐ ${voteAvg}`
+          
+          const parentDiv = document.querySelector('#card-group')
+          parentDiv.appendChild(div1)
+          div1.appendChild(div2)
+          div2.append(img, div3)
+          div3.append(cardTitle)
+          div3.append(cardText) 
+        })
+      })
+    }, {once: true})
+
+    hipsterBtn.addEventListener('click', function (event) {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/movies/mvti/',
+        params: {
+          answer: '3'
+        }
+      })
+      .then(function (res) {
+        const movieList = res.data.moviesList
+
+        movieList.forEach((movie) => {
+          const movieTitle = movie.title
+          const movieDate = movie.release_date
+          const voteAvg = movie.vote_average
+          const posterPath = movie.poster_path
+
+          const div1 = document.createElement('div')
+          div1.setAttribute('class', 'col')
+          const div2 = document.createElement('div')
+          div2.setAttribute('class', 'card')
+          const img = document.createElement('img')
+          img.setAttribute('src', posterPath)
+          img.setAttribute('class', 'card-img-top')
+          const div3 = document.createElement('div')
+          div3.setAttribute('class', 'card-body')
+          const cardTitle = document.createElement('h6')
+          cardTitle.setAttribute('class', 'card-title text-center fw-bold')
+          cardTitle.innerText = movieTitle
+          const cardText = document.createElement('p')
+          cardText.setAttribute('class', 'card-text text-center')
+          cardText.innerText = `평점 ⭐ ${voteAvg}`
+          
+          const parentDiv = document.querySelector('#card-group')
+          parentDiv.appendChild(div1)
+          div1.appendChild(div2)
+          div2.append(img, div3)
+          div3.append(cardTitle)
+          div3.append(cardText) 
+        })
+      })
+    }, {once: true})
+
+    randomBtn.addEventListener('click', function (event) {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/movies/mvti/',
+        params: {
+          answer: '4'
+        }
+      })
+      .then(function (res) {
+        const movieList = res.data.moviesList
+
+        movieList.forEach((movie) => {
+          const movieTitle = movie.title
+          const movieDate = movie.release_date
+          const voteAvg = movie.vote_average
+          const posterPath = movie.poster_path
+
+          const div1 = document.createElement('div')
+          div1.setAttribute('class', 'col')
+          const div2 = document.createElement('div')
+          div2.setAttribute('class', 'card')
+          const img = document.createElement('img')
+          img.setAttribute('src', posterPath)
+          img.setAttribute('class', 'card-img-top')
+          const div3 = document.createElement('div')
+          div3.setAttribute('class', 'card-body')
+          const cardTitle = document.createElement('h6')
+          cardTitle.setAttribute('class', 'card-title text-center fw-bold')
+          cardTitle.innerText = movieTitle
+          const cardText = document.createElement('p')
+          cardText.setAttribute('class', 'card-text text-center')
+          cardText.innerText = `평점 ⭐ ${voteAvg}`
+          
+          const parentDiv = document.querySelector('#card-group')
+          parentDiv.appendChild(div1)
+          div1.appendChild(div2)
+          div2.append(img, div3)
+          div3.append(cardTitle)
+          div3.append(cardText) 
+        })
+      })
+    }, {once: true})
+  </script>
+{% endblock %}

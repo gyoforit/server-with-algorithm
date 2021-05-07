@@ -3,6 +3,8 @@ from django.views.decorators.http import require_GET, require_POST, require_http
 from .models import Movie
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from random import random, sample
 
 # Create your views here.
 @require_GET
@@ -36,4 +38,38 @@ def recommended(request):
         'from_now': from_now,
     }
     return render(request, 'movies/recommended.html', context)
+
+
+@login_required
+@require_GET
+def recommended2(request):
+    return render(request, 'movies/recommended2.html')
+
+
+@login_required
+@require_GET
+def mvti(request):
+    answer = request.GET.get('answer')
+    movies = ''
+    if answer == '1':
+        movies = Movie.objects.filter(release_date__year__lte=1999).order_by('?')[:10]
+    elif answer == '2':
+        movies = Movie.objects.order_by('-vote_average')[:10]
+    elif answer == '3':
+        movies = Movie.objects.order_by('popularity')[:10]
+    else:
+        movies = Movie.objects.order_by('?')[:10]
+
+    movies_list = []
+    for movie in movies:
+        movies_list.append({
+            'title': movie.title,
+            'release_date': movie.release_date,
+            'vote_average': movie.vote_average,
+            'poster_path': movie.poster_path,
+            })
+    response = {
+        'moviesList': movies_list,
+    }
+    return JsonResponse(response)
     
