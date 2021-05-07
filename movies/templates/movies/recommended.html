@@ -3,23 +3,31 @@
 {% block content %}
 
 
-<h1 class="text-center my-4">{{ today_month }}월에 어울리는 영화들!</h1>
+<h1 class="text-center my-5 fw-bold">{{ today_month }}월에 개봉한 영화들 😎</h1>
 <div class="card-group row row-cols-4 g-4">
   {% for movie in movies %}
     <div class="col">
       <div class="card">
         <img src="{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}_poster">
         <div class="card-body">
-          <h5 class="card-title text-center">{{ movie.title }}</h5>
+          <h5 class="card-title text-center fw-bold">{{ movie.title }}</h5>
           <p class="card-text">⭐평점 {{ movie.vote_average }}</p>
           <p class="card-text">
             {% for k, v in from_now.items %}
               {% if k == movie.pk %}
-                {{ v }}년 전 이번 달에 개봉했어요!
+                {% if v == 0 %}
+                  이번 달에 개봉한 따끈따끈한 영화!
+                {% elif v == 1 %}
+                  작년 {{ today_month }}월에 개봉했어요!
+                {% elif v == 2 %}
+                  재작년 {{ today_month }}월에 개봉했어요!
+                {% else %}
+                  {{ v }}년 전 {{ today_month }}월에 개봉했어요!
+                {% endif %}
               {% endif %}
             {% endfor %}
           </p>
-          <p class="card-text"><small class="text-muted"></small></p>
+          <a class="text-decoration-none" href="{% url 'movies:detail' movie.pk %}"><p class="card-text"><small class="text-muted">영화상세정보</small></p></a>
         </div>
       </div>
     </div>

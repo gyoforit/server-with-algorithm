@@ -11,9 +11,9 @@
       <form id="follow-form" data-user-id="{{ person.pk }}">
         {% csrf_token %}
         {% if request.user in followers %}
-          <button class="btn-secondary btn-lg" role="button">Unfollow</button>
+          <button class="btn-secondary btn" role="button">Unfollow</button>
         {% else %}
-          <button class="btn-primary btn-lg" role="button">Follow</button>
+          <button class="btn-primary btn" role="button">Follow</button>
         {% endif %}
       </form>
     {% endif %}
@@ -42,7 +42,12 @@
         const followBtn = document.querySelector('#follow-form > button')
 
         followCountStatus.innerText = `팔로잉 : ${followingsCount} / 팔로워 : ${followersCount}`
-        followBtn.innerText = followed ? 'unfollow' : 'follow'
+        followBtn.innerText = followed ? 'Unfollow' : 'Follow'
+        if (followed) {
+          followBtn.setAttribute('class', 'btn-secondary btn')
+        } else {
+          followBtn.setAttribute('class', 'btn-primary btn')
+        }
       })
     })
   </script>

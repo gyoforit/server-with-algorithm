@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from .models import Movie
 from datetime import datetime
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @require_GET
@@ -22,10 +22,9 @@ def detail(request, movie_pk):
     }
     return render(request, 'movies/detail.html', context)
 
-
+@login_required
 @require_GET
 def recommended(request):
-    # 개봉월이 현재 검색하는 달과 같은 영화를 추천해주려 한다.
     today_month = datetime.today().month
     movies = Movie.objects.filter(release_date__month=today_month)
     from_now = dict()
@@ -36,6 +35,5 @@ def recommended(request):
         'movies': movies,
         'from_now': from_now,
     }
-
     return render(request, 'movies/recommended.html', context)
     

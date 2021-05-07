@@ -28,9 +28,9 @@
       </form>
     </div>
     <span id="like-count-{{ review.pk }}">
-      {{ review.like_users.all|length }} 명이 이 글을 좋아합니다.<br>
+      {{ review.like_users.all|length }}명이 이 글을 좋아합니다.<br>
     </span>
-    <a href="{% url 'community:detail' review.pk %}">[detail]</a>
+    <a class="d-block" href="{% url 'community:detail' review.pk %}">[detail]</a>
     <hr>
   {% endfor %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -53,7 +53,7 @@
           const { likeCount, liked } = res.data
           const likeStatus = document.querySelector(`#like-${reviewId}`)
           const likeCountStatus = document.querySelector(`#like-count-${reviewId}`)
-          likeStatus.innerText = liked ? '좋아요 취소' : '좋아요'
+          likeStatus.innerHTML = liked ? '<i class="fas fa-heart fa-lg" style="color:crimson;"></i>' : '<i class="fas fa-heart fa-lg" style="color:black;"></i>'
           likeCountStatus.innerText = `${likeCount}명이 이 글을 좋아합니다.`
         })
         .catch(function (err) {
