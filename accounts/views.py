@@ -77,7 +77,7 @@ def follow(request, user_pk):
         follow_status = {
             'followed': followed,
             'followersCount': person.followers.count(),
-            'followingCount': person.followings.count(),
+            'followingsCount': person.followings.count(),
         }
         return JsonResponse(follow_status)
     return redirect('accounts:login')

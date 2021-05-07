@@ -41,8 +41,8 @@
         const followCountStatus = document.querySelector('#follow-count')
         const followBtn = document.querySelector('#follow-form > button')
 
-        followCountStatus.innerText = 팔로잉 : ${followingsCount} / 팔로워 : ${followersCount}
-        followBtn.innerText = followed ? '팔로우 취소' : '팔로우'
+        followCountStatus.innerText = `팔로잉 : ${followingsCount} / 팔로워 : ${followersCount}`
+        followBtn.innerText = followed ? 'unfollow' : 'follow'
       })
     })
   </script>
