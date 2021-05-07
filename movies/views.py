@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from .models import Movie
+from datetime import datetime
 
 
 # Create your views here.
@@ -24,4 +25,14 @@ def detail(request, movie_pk):
 
 @require_GET
 def recommended(request):
-    pass
+    # 출시월이 현재 검색하는 달과 같은 영화를 추천해주려 한다.
+    today = datetime.today()
+    movies = Movie.objects.filter(release_date__month=today)
+    
+    context = {
+        'today': today,
+        'movies': movies,
+    }
+
+    return render(request, 'movies/recommended.html', context)
+    
