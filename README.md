@@ -52,7 +52,7 @@
 
 ### c. 영화 추천 알고리즘 (1)
 
-> [movies/recommended.html 바로가기](movies/templates/movies/recommened.html)
+> [movies/recommended.html 바로가기](movies/templates/movies/recommended.html)
 >
 > 인스타그램의 'n년 전 오늘' 기능을 참고해서 'n년 전 이번 달'에 개봉한 영화들을 추천하는 알고리즘을 구현했다.
 
@@ -75,7 +75,7 @@
 
 ### d. 영화 추천 알고리즘 (2)
 
-> [movies/recommended2.html 바로가기](movies/templates/movies/recommened2.html)
+> [movies/recommended2.html 바로가기](movies/templates/movies/recommended2.html)
 >
 > 알고리즘 (1)만 만들기는 아쉬워서 수업 종료 후 혼자 만들어 본 알고리즘이다. 한마디로 'MVTI!'
 >
