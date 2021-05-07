@@ -3,12 +3,26 @@
 {% block content %}
 
 
-<h1>추천 영화</h1>
-{{ today}}
-
-{% comment %} {% for movie in movies %}
-
-  {{ movie.title }}
-
-{% endfor %} {% endcomment %}
+<h1 class="text-center my-4">{{ today_month }}월에 어울리는 영화들!</h1>
+<div class="card-group row row-cols-4 g-4">
+  {% for movie in movies %}
+    <div class="col">
+      <div class="card">
+        <img src="{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}_poster">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ movie.title }}</h5>
+          <p class="card-text">⭐평점 {{ movie.vote_average }}</p>
+          <p class="card-text">
+            {% for k, v in from_now.items %}
+              {% if k == movie.pk %}
+                {{ v }}년 전 이번 달에 개봉했어요!
+              {% endif %}
+            {% endfor %}
+          </p>
+          <p class="card-text"><small class="text-muted"></small></p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}
